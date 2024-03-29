@@ -2,12 +2,11 @@
 //these are two methods of utility async function
 
 const asynchandler = (requestHandler)=>{
-     (req , res , next)=>{
+   return  (req , res , next)=>{
          Promise.resolve(requestHandler(req , res, next))
          .catch((err)=>next(err))
      }
 }
-
 // const asynchandler = ()=>{}
 // const asynchandler = (func)=>()=>{}
 //const asynchandler = (func)=>async()=>{}
@@ -22,4 +21,4 @@ const asynchandler = (requestHandler)=>{
 //          })
 //       }
 // }
-export default asynchandler
+export {asynchandler}

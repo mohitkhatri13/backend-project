@@ -1,23 +1,21 @@
 // require('dotenv').config({path: './env'})
-//Note - dotenv ke import wale function ko use karne ke liye hume ev script me changes karne padenge 
-import dotenv from "dotenv"
+//Note - dotenv ke import wale function ko use karne ke liye hume ws script me changes karne padenge
+import dotenv from "dotenv";
 import connectDB from "./db/index.js";
-
+import {app} from "./app.js"
 dotenv.config({
-    path :'./env'
-})
+  path: "./env",
+});
 
 connectDB()
-.then( ()=>{
-      app.listen(process.env.PORT ||4000,()=>{
-            console.log(`Server is running at port :${process.env.PORT}`);
-      } ) 
-})
-.catch((err)=>{
-    console.log("mongo db connection failed !!!" , err);
-})
-
-
+  .then(() => {
+    app.listen(process.env.PORT || 4000, () => {
+      console.log(`Server is running at port :${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("mongo db connection failed !!!", err);
+  });
 
 /*  this is the first approach but not use because it make index file bulky 
 import express from "express"
