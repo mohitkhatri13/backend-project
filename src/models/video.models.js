@@ -43,7 +43,9 @@ const videoSchema = new Schema(
 });
 
 videoSchema.plugin(mongooseAggregatePaginate)
-
+//agreegation framework in mongoose
+// this is agreegation pipeline 
+// now we can agreegate out video model 
 
 
 export const Video = mongoose.model("Model" ,videoSchema );

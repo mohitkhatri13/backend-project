@@ -10,6 +10,7 @@ const asynchandler = (requestHandler)=>{
 // const asynchandler = ()=>{}
 // const asynchandler = (func)=>()=>{}
 //const asynchandler = (func)=>async()=>{}
+
 // const asynchandler  = (fn)=>async (req , res , next)=> {
 //       try{
 //               await fn(req , res , next)

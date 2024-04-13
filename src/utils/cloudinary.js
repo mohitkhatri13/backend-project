@@ -1,5 +1,5 @@
 //file uploading on backend 
-
+//importing v2  named custom  as cloudinary
 import {v2 as cloudinary}from "cloudinary"
 import fs from "fs"
 //fs = file system library automatically installed with node packages
@@ -13,7 +13,8 @@ cloudinary.config({
 
 const uploadOnCloudinary = async (localFilePath)=>{
      try{
-        if(!localFilePath)return null//upload the file on cloudinary 
+        if(!localFilePath)return null
+        //upload the file on cloudinary 
        const response =  await cloudinary.uploader.upload(localFilePath ,{
             resource_type:auto
          } )
@@ -23,7 +24,7 @@ const uploadOnCloudinary = async (localFilePath)=>{
          return response
      }
      catch(error){
-            fs.unlinkSync(localFilePath) // reomve the locally saved temmporary file as the upload operation got failed 
+            fs.unlinkSync(localFilePath) // remove the locally saved temmporary file as the upload operation got failed 
      }
 }
 
