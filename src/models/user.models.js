@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 //jwt and becryt are use for tokens and for password hashing respec tively 
-import { Jwt } from "jsonwebtoken";
+// import { JWT } from "jsonwebtoken";
 import bcrypt from "bcrypt"
 
 const userSchema = new Schema(
@@ -59,7 +59,7 @@ const userSchema = new Schema(
 userSchema.pre("save" ,async function (next) {
     if(!this.isModified("password")) return next();
     //hash is method of bcrypt
-    this.password = bcrypt.hash(this.password ,10)
+    this.password = await bcrypt.hash(this.password ,10)
     next()
 }) //here is the problem means jab bhi data me kuch change hoga toh ye function call hoga 
 // so we want that it  runs only when we change our password or save it  so we use if consition inside it 
