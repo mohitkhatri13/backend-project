@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 //jwt and becryt are use for tokens and for password hashing respec tively 
-// import { JWT } from "jsonwebtoken";
+import  jwt  from "jsonwebtoken";
 import bcrypt from "bcrypt"
 
 const userSchema = new Schema(
@@ -45,7 +45,7 @@ const userSchema = new Schema(
 
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: [true, 'Password is required'],
     },
     refreshToken: {
       type: String,
@@ -55,7 +55,7 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
-//pre si a hook in mongoose 
+//pre is a hook in mongoose 
 userSchema.pre("save" ,async function (next) {
     if(!this.isModified("password")) return next();
     //hash is method of bcrypt
@@ -72,7 +72,8 @@ userSchema.methods.isPasswordCorrect = async function
 }
 // hum methods me bahut kuch add kar sakte hai 
 userSchema.methods.generateAccessToken = function(){
-  return jwt.sign({  // used to generate access  token
+  return jwt.sign({  // used to generate access  token 
+     //access token are short lived
      _id:this._id,
      email:this.email,
      username:this.username,
@@ -84,7 +85,9 @@ userSchema.methods.generateAccessToken = function(){
   }
   )
 }
-  // this is refresh token it contain le ss information
+  // this is refresh token it contain less information
+  //refresh tokens are long lived
+  //refresh token database e saved rehta hai 
 userSchema.methods.generateRefreshToken = function(){
   return jwt.sign({
     _id:this._id,
@@ -96,6 +99,13 @@ userSchema.methods.generateRefreshToken = function(){
  )
 
 }
+
+//what is use of access tokens and  refresh tokens
+// user ko hum access tokens se hi access dete hai par ek time tk if login session expired
+// uske baad hume vapas login krna hota hai by using username and password  
+// than refresh token come in picture it also saved in database and user also access it 
+// it says baar bar aapko access toje daalne ki need ni hai ek endpoint hit kardo and if the refresh token and 
+// refresh token in database matched than i willl give you new access token directly
 
 
 export const User = mongoose.model("User", userSchema);
