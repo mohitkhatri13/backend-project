@@ -23,7 +23,7 @@ router.route("/register").post(
       name: "coverimage",
       maxCount: 1,
     },
-  ]),
+  ]),   // this specific is used to upload files using multer
   registerUser
 );
 
