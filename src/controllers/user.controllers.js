@@ -110,6 +110,8 @@ const loginUser = asynchandler(async (req, res) => {
   // access and refresh token
   //send cookie include tokens
   const { email, username, password } = req.body;
+  console.log(username);
+  console.log(password);
   if (!username && !email) {
     throw new apierrors(400, "username or password is required ");
   }
@@ -240,6 +242,7 @@ const changeCurrentPassword = asynchandler(async (req, res) => {
 });
 
 const getcurrentuser = asynchandler(async (req, res) => {
+  console.log(req.user)
   return res
     .status(200)
     .json(200, req.user, "current user fetched succesfully");
@@ -450,6 +453,8 @@ const getwatchedhistory = asynchandler(async (req, res) => {
     user[0].watchHistory,
      "Watch history fetched succesfully"))
 });
+
+ 
 
 export {
   registerUser,
